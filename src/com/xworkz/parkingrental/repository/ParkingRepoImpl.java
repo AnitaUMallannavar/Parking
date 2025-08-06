@@ -29,7 +29,7 @@ public class ParkingRepoImpl implements ParkingRepo {
 		EntityTransaction transaction = manager.getTransaction();
 		try {
 			transaction.begin();
-			manager.merge(entity);
+			manager.merge(entity) ;
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
