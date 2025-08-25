@@ -5,47 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ffa727c5-4cac-4880-9bf2-255eefa90fce" name="Changes" comment="Check">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Parking_lwc_types.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parking.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebContent/Parking.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parking-rental-app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/parking_rental_app_lwc_types.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/parking-rental-app.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/AdminLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/AdminLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/AdminLoginSuccess.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/AdminLoginSuccess.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/AdminViewData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/AdminViewData.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/BootStrapLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/BootStrapLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/ContactDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/ContactDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/GlowingLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/GlowingLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/Landing.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/Landing.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/Login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/Login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/UpdateParkingInfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/UpdateParkingInfo.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/UserHome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/UserHome.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/UserLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/UserLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/UserLoginSuccess.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/UserLoginSuccess.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebContent/UserParkingInfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/UserParkingInfo.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/UserRegistration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/UserRegistration.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebContent/UserViewData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/UserViewData.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/config/SpringConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebContent/WEB-INF/views/parkinginfo/parkingupdate.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/views/parkingupdate.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/controller/ParkingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/controller/ParkingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/dto/ParkingInfoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/dto/ParkingInfoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/dto/UserParkingDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/dto/UserParkingDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/entity/ParkingInfoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/entity/ParkingInfoEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/entity/UserParkingEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/entity/UserParkingEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/repository/ParkingRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/repository/ParkingRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/repository/ParkingRepoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/repository/ParkingRepoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/service/ParkingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/service/ParkingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/service/ParkingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/service/ParkingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xworkz/parkingrental/util/UserParkingEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xworkz/parkingrental/util/UserParkingEmail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,6 +92,10 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\thisi\OneDrive\Desktop\Parking\WebContent" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\thisi\OneDrive\Desktop\Parking\WebContent\WEB-INF\views" />
+      <recent name="C:\Users\thisi\OneDrive\Desktop\Parking\WebContent" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Tomcat: parking-rental-app" type="com.poratu.idea.plugins.tomcat">
@@ -154,6 +122,14 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.27812.49" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.27812.49" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ffa727c5-4cac-4880-9bf2-255eefa90fce" name="Changes" comment="" />
@@ -163,6 +139,7 @@
       <updated>1754483875887</updated>
       <workItem from="1754981617731" duration="12170000" />
       <workItem from="1755320785805" duration="1248000" />
+      <workItem from="1756122878451" duration="43000" />
     </task>
     <task id="LOCAL-00001" summary="Check">
       <option name="closed" value="true" />
@@ -172,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754483921349</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Check">
+      <option name="closed" value="true" />
+      <created>1756117809221</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1756117809221</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,5 +166,46 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Check" />
     <option name="LAST_COMMIT_MESSAGE" value="Check" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xworkz/parkingrental/service/ParkingServiceImpl.java</url>
+          <line>290</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xworkz/parkingrental/service/ParkingServiceImpl.java</url>
+          <line>294</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xworkz/parkingrental/service/ParkingServiceImpl.java</url>
+          <line>297</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xworkz/parkingrental/service/ParkingServiceImpl.java</url>
+          <line>299</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xworkz/parkingrental/controller/ParkingController.java</url>
+          <line>256</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xworkz/parkingrental/controller/ParkingController.java</url>
+          <line>257</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xworkz/parkingrental/controller/ParkingController.java</url>
+          <line>258</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

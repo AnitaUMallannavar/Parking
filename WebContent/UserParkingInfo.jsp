@@ -10,10 +10,8 @@
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 		  rel="stylesheet"
-		  integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 		  crossorigin="anonymous">
 
-	<!-- Custom CSS -->
 	<link rel="stylesheet" href="style.css">
 
 	<style>
@@ -28,57 +26,6 @@
 			font-size: 14px;
 		}
 	</style>
-
-	<script>
-		function enableSubmit() {
-			let inputs = document.getElementsByClassName('required');
-			let btn = document.querySelector('button[type="submit"]');
-			let isValid = true;
-
-			for (let i = 0; i < inputs.length; i++) {
-				if (inputs[i].value.trim() === "") {
-					isValid = false;
-					break;
-				}
-			}
-			btn.disabled = !isValid;
-		}
-
-		function vehicleNoAjax() {
-			let vehicleNo = document.getElementById("vehicleNo").value;
-			let url = "http://localhost:8080/parking-rental-app/validateVehicleNo/" + vehicleNo;
-
-			const xmlHttp = new XMLHttpRequest();
-			xmlHttp.open("GET", url);
-			xmlHttp.send();
-			xmlHttp.onload = function () {
-				document.getElementById('display').innerHTML = this.responseText;
-			}
-		}
-
-		function ajaxWithObj() {
-			let location = document.getElementById("location").value;
-			let vehicleType = document.getElementById("vehicleType").value;
-			let engineType = document.getElementById("engineType").value;
-			let classification = document.getElementById("classification").value;
-			let term = document.getElementById("term").value;
-
-			let url = "http://localhost:8080/parking-rental-app/getPriceAndDiscount/"
-					+ location + "/" + vehicleType + "/" + engineType + "/"
-					+ classification + "/" + term;
-
-			const xmlHttp = new XMLHttpRequest();
-			xmlHttp.open("GET", url);
-			xmlHttp.send();
-			xmlHttp.onload = function () {
-				let obj = JSON.parse(this.responseText);
-				document.getElementById("price").value = obj.price;
-				document.getElementById("discount").value = obj.discount;
-				let totalAmount = obj.price - ((obj.price * obj.discount) / 100);
-				document.getElementById("totalAmount").value = totalAmount;
-			}
-		}
-	</script>
 </head>
 <body style="background-color: white; margin-bottom: 10%; margin-top: 10%;">
 
@@ -109,34 +56,34 @@
 			<h3 class="p-2" style="color: black;">Slot Booking Form</h3>
 		</div>
 		<div class="card-body">
-			<form action="addUserParkingInfo" method="post" enctype="multipart/form-data">
+			<form action="parkinginfo" method="post" enctype="multipart/form-data">
 
 				<!-- Vehicle No -->
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<input type="text" id="vehicleNo" name="vehicleNo"
+							   value="${dto.vehicleNo}"
 							   placeholder="Enter vehicle No."
-							   class="form-control shadow required"
-							   onchange="vehicleNoAjax()" onclick="enableSubmit()" />
+							   class="form-control shadow required" />
 					</div>
 				</div>
 
 				<!-- Location & Vehicle Type -->
 				<div class="row mb-3">
 					<div class="col-md-6">
-						<select name="location" id="location" class="form-select shadow required" onclick="enableSubmit()">
+						<select name="location" id="location" class="form-select shadow required">
 							<option value="">Location</option>
-							<option value="RajajiNagar">RajajiNagar</option>
-							<option value="E.city">E.city</option>
-							<option value="VijayaNagar">VijayaNagar</option>
-							<option value="BTM">BTM</option>
+							<option value="RajajiNagar" ${dto.location == 'RajajiNagar' ? 'selected' : ''}>RajajiNagar</option>
+							<option value="E.city" ${dto.location == 'E.city' ? 'selected' : ''}>E.city</option>
+							<option value="VijayaNagar" ${dto.location == 'VijayaNagar' ? 'selected' : ''}>VijayaNagar</option>
+							<option value="BTM" ${dto.location == 'BTM' ? 'selected' : ''}>BTM</option>
 						</select>
 					</div>
 					<div class="col-md-6">
-						<select name="vehicleType" id="vehicleType" class="form-select shadow required" onclick="enableSubmit()">
+						<select name="vehicleType" id="vehicleType" class="form-select shadow required">
 							<option value="">Vehicle Type</option>
-							<option value="2_Wheeler">2-wheeler</option>
-							<option value="4_Wheeler">4-wheeler</option>
+							<option value="2_Wheeler" ${dto.vehicleType == '2_Wheeler' ? 'selected' : ''}>2-wheeler</option>
+							<option value="4_Wheeler" ${dto.vehicleType == '4_Wheeler' ? 'selected' : ''}>4-wheeler</option>
 						</select>
 					</div>
 				</div>
@@ -144,24 +91,24 @@
 				<!-- Engine Type & Classification -->
 				<div class="row mb-3">
 					<div class="col-md-6">
-						<select name="engineType" id="engineType" class="form-select shadow required" onclick="enableSubmit()">
+						<select name="engineType" id="engineType" class="form-select shadow required">
 							<option value="">Engine Type</option>
-							<option value="Normal">Normal</option>
-							<option value="Electrical">Electrical</option>
+							<option value="Normal" ${dto.engineType == 'Normal' ? 'selected' : ''}>Normal</option>
+							<option value="Electrical" ${dto.engineType == 'Electrical' ? 'selected' : ''}>Electrical</option>
 						</select>
 					</div>
 					<div class="col-md-6">
-						<select name="classification" id="classification" class="form-select shadow required" onclick="enableSubmit()">
+						<select name="classification" id="classification" class="form-select shadow required">
 							<option value="">Classification</option>
 							<optgroup label="Bike">
-								<option value="Bike">Bike</option>
+								<option value="Bike" ${dto.classification == 'Bike' ? 'selected' : ''}>Bike</option>
 							</optgroup>
 							<optgroup label="Cars">
-								<option value="BMW">BMW</option>
-								<option value="Renault">Renault</option>
-								<option value="Skoda">Skoda</option>
-								<option value="Kia">Kia</option>
-								<option value="Toyata">Toyata</option>
+								<option value="BMW" ${dto.classification == 'BMW' ? 'selected' : ''}>BMW</option>
+								<option value="Renault" ${dto.classification == 'Renault' ? 'selected' : ''}>Renault</option>
+								<option value="Skoda" ${dto.classification == 'Skoda' ? 'selected' : ''}>Skoda</option>
+								<option value="Kia" ${dto.classification == 'Kia' ? 'selected' : ''}>Kia</option>
+								<option value="Toyata" ${dto.classification == 'Toyata' ? 'selected' : ''}>Toyata</option>
 							</optgroup>
 						</select>
 					</div>
@@ -171,21 +118,21 @@
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<label for="term">Term:</label>
-						<select name="term" id="term" onchange="ajaxWithObj()" class="form-select shadow required" onclick="enableSubmit()">
+						<select name="term" id="term" class="form-select shadow required">
 							<option value="">Select</option>
-							<option value="1min">1 Minute</option>
-							<option value="1_day">1 Day</option>
-							<option value="7_days">7 Days</option>
-							<option value="15_days">15 Days</option>
-							<option value="30_days">30 Days</option>
-							<option value="90_days">90 Days</option>
-							<option value="180_days">180 Days</option>
-							<option value="360_days">360 Days</option>
+							<option value="1min" ${dto.term == '1min' ? 'selected' : ''}>1 Minute</option>
+							<option value="1_day" ${dto.term == '1_day' ? 'selected' : ''}>1 Day</option>
+							<option value="7_days" ${dto.term == '7_days' ? 'selected' : ''}>7 Days</option>
+							<option value="15_days" ${dto.term == '15_days' ? 'selected' : ''}>15 Days</option>
+							<option value="30_days" ${dto.term == '30_days' ? 'selected' : ''}>30 Days</option>
+							<option value="90_days" ${dto.term == '90_days' ? 'selected' : ''}>90 Days</option>
+							<option value="180_days" ${dto.term == '180_days' ? 'selected' : ''}>180 Days</option>
+							<option value="360_days" ${dto.term == '360_days' ? 'selected' : ''}>360 Days</option>
 						</select>
 					</div>
 					<div class="col-md-6">
 						<label for="price">Price:</label>
-						<input type="text" id="price" name="price" class="form-control shadow" style="background-color: ghostwhite;" readonly />
+						<input type="text" id="price" name="price" value="${dto.price}" class="form-control shadow" style="background-color: ghostwhite;" readonly />
 					</div>
 				</div>
 
@@ -193,11 +140,11 @@
 				<div class="row mb-3">
 					<div class="col-md-6">
 						<label for="discount">Discount(%):</label>
-						<input type="text" id="discount" name="discount" class="form-control shadow" style="background-color: ghostwhite;" readonly />
+						<input type="text" id="discount" name="discount" value="${dto.discount}" class="form-control shadow" style="background-color: ghostwhite;" readonly />
 					</div>
 					<div class="col-md-6">
 						<label for="totalAmount">Total Amount:</label>
-						<input type="text" id="totalAmount" name="totalAmount" class="form-control shadow" style="background-color: ghostwhite;" readonly />
+						<input type="text" id="totalAmount" name="totalAmount" value="${dto.totalAmount}" class="form-control shadow" style="background-color: ghostwhite;" readonly />
 					</div>
 				</div>
 
@@ -206,14 +153,17 @@
 					<div class="col-md-10">
 						<label for="file">Upload vehicle pic:</label>
 						<input type="file" name="file" id="file" class="form-control shadow" style="background-color: ghostwhite;">
+						<c:if test="${not empty dto.fileName}">
+							<small>Current file: ${dto.originalFileName}</small>
+						</c:if>
 					</div>
 				</div>
 
 				<!-- Buttons -->
 				<div class="row" style="margin-left: 25%;">
 					<div class="col-md-12">
-						<button type="submit" id="smtBtn" class="btn w-30 shadow" style="background-color: turquoise; color: black; text-align: center;" disabled>
-							Book
+						<button type="submit" id="smtBtn" class="btn w-30 shadow" style="background-color: turquoise; color: black; text-align: center;">
+							Update
 						</button>
 						&ensp;&ensp;&ensp;
 						<button type="reset" class="btn w-30 shadow" style="background-color: turquoise; color: black; text-align: center;">
@@ -234,8 +184,6 @@
 </div>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-		crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

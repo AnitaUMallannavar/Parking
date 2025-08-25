@@ -128,7 +128,8 @@
 								<img src="showFile?fileName=${dto.fileName}&contentType=${dto.contentType}" width="60" height="50"></a>
 						</td>
 						<td>
-							<a href="parkinginfo/${dto.vehicleNo}" class="btn btn-sm" style="background-color: turquoise;">Update</a>
+                          							<a href="parkinginfoupdate?vehicleNo=${dto.vehicleNo}" class="btn btn-sm" style="background-color: turquoise;">Update</a>
+
 						</td>
  						<td>
 							<a href="deleteUserParkingData?vehicleNo=${dto.vehicleNo}" class="btn btn-sm" style="background-color: turquoise;">Delete</a>

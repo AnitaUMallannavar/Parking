@@ -13,12 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.xworkz.parkingrental.constant.FileConstant;
 import com.xworkz.parkingrental.dto.ParkingDTO;
@@ -29,6 +26,7 @@ import com.xworkz.parkingrental.service.ParkingService;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Controller
 @RequestMapping("/")
 @Slf4j
 public class ParkingController {
@@ -253,20 +251,20 @@ public class ParkingController {
 		outputStream.flush();
 	}
 
-	@GetMapping("/parkinginfo/{vehicleNo}")
+	@PostMapping("/parkinginfoupdate/{vehicleNo}")
 	public String loadingUserParkingData(@PathVariable String vehicleNo, Model model) {
 		log.info("running loadingUserParkingData()");
 		UserParkingDTO upDto = service.findByVehicleNo(vehicleNo);
 		model.addAttribute("upDto", upDto);
-		return "parkingupdate"; // must match the JSP name
+		return "parkingupdate";
 	}
 
 
 
 
 	@PostMapping("/parkinginfo")
-	public String updateUserParkingData(UserParkingDTO upDto, String vNo, Model model, MultipartFile file,
-			HttpServletRequest req) throws FileNotFoundException, IOException {
+	public String updateUserParkingData(UserParkingDTO upDto, @RequestParam("vehicleNo") String vNo, Model model, MultipartFile file,
+										HttpServletRequest req) throws FileNotFoundException, IOException {
 		log.info("controller: running updateUserParkingData()");
 		log.info("controller: updateUserParkingData(): old vNo from UI: " + vNo);
 
