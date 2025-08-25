@@ -13,7 +13,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-
 @Entity
 @Getter
 @Setter
@@ -32,29 +31,33 @@ public class ParkingInfoEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID")
 	private int id;
-	
+
 	@Column(name="LOCATION")
 	private String location;
-	
+
 	@Column(name="VEHICLE_TYPE")
 	private String vehicleType;
-	
+
 	@Column(name="ENGINE_TYPE")
 	private String engineType;
-	
+
 	@Column(name="CLASSIFICATION")
 	private String classification;
-	
+
 	@Column(name="TERM")
 	private String term;
-	
+
 	@Column(name="PRICE")
 	private int price;
-	
+
 	@Column(name="DISCOUNT")
-	private String discount;
-	
-	public ParkingInfoEntity(){
-		log.info("Created: "+getClass().getSimpleName());
+	private String discount;   // 🔹 FIXED (was String)
+
+	@Column(name="SLOTS")
+	private int slots;
+
+	public ParkingInfoEntity() {
+		log.info("Created: " + getClass().getSimpleName());
 	}
 }
+

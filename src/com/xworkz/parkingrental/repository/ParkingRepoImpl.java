@@ -3,12 +3,8 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
+import javax.persistence.*;
+
 import org.springframework.stereotype.Repository;
 import com.xworkz.parkingrental.entity.ParkingEntity;
 import com.xworkz.parkingrental.entity.ParkingInfoEntity;
@@ -22,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ParkingRepoImpl implements ParkingRepo {
 
 	private EntityManagerFactory factory = Persistence.createEntityManagerFactory("xworkz");
+//    @Autowired
+//	public UserParkingRepository userParkingRepository;
 
 	public boolean updateLoginTime(ParkingEntity entity) {
 		log.info("running updateLoginTime()");
@@ -40,6 +38,20 @@ public class ParkingRepoImpl implements ParkingRepo {
 		}
 		return false;
 	}
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	@Override
+	public ParkingInfoEntity findByParkingInfoId(int id) {
+		try {
+			String jpql = "SELECT p FROM ParkingInfoEntity p WHERE p.id = :id";
+			return entityManager.createQuery(jpql, ParkingInfoEntity.class)
+					.setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 
 	public ParkingEntity findByEmail(String email) {
 		log.info("running findByEmail");
@@ -56,26 +68,25 @@ public class ParkingRepoImpl implements ParkingRepo {
 		}
 	}
 
-	// to update parking info
-	// tocheck whether the details are exist or not
-	public ParkingInfoEntity findByLocationAndVehicleTypeAndEngineTypeAndClsAndTerm(String location, String vehicleType,
-			String engineType, String classification, String term) {
-		log.info("running findByLocationAndVehicleTypeAndEngineTypeAndClsAndTerm()");
+
+
+	public boolean saveUserParkingInfo(UserParkingEntity entity) {
+		log.info("running saveParkingInfo()");
 		EntityManager manager = factory.createEntityManager();
-		Query query = manager.createNamedQuery("findByLTTCT");
-		query.setParameter("lc", location);
-		query.setParameter("vtype", vehicleType);
-		query.setParameter("etype", engineType);
-		query.setParameter("cls", classification);
-		query.setParameter("trm", term);
+		EntityTransaction transaction = manager.getTransaction();
 		try {
-			Object entity = query.getSingleResult();
-			return (ParkingInfoEntity) entity;
-		} catch (Exception e) {
-			log.info("no record found");
-			return null;
+			transaction.begin();
+			manager.merge(entity);
+			transaction.commit();
+			return true;
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			manager.close();
 		}
 	}
+
 
 	public boolean saveParkingInfo(ParkingInfoEntity entity) {
 		log.info("running saveParkingInfo()");
@@ -83,7 +94,7 @@ public class ParkingRepoImpl implements ParkingRepo {
 		EntityTransaction transaction = manager.getTransaction();
 		try {
 			transaction.begin();
-			manager.persist(entity);
+			manager.merge(entity);
 			transaction.commit();
 			return true;
 		} catch (PersistenceException e) {
@@ -143,20 +154,6 @@ public class ParkingRepoImpl implements ParkingRepo {
 		return false;
 	}
 
-	public boolean saveUserParkingInfo(UserParkingEntity entity) {
-		log.info("running saveUserParkingInfo()");
-		EntityManager manager = factory.createEntityManager();
-		EntityTransaction transaction = manager.getTransaction();
-		try {
-			transaction.begin();
-			manager.persist(entity);
-			transaction.commit();
-			return true;
-		} catch (PersistenceException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 
 	public boolean updateUserEntity(UserEntity entity) {
 		log.info("running updateUserEntity()");

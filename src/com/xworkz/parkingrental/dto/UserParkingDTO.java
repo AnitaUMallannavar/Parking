@@ -1,6 +1,8 @@
 package com.xworkz.parkingrental.dto;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,6 +22,7 @@ public class UserParkingDTO implements Serializable, Comparable<UserParkingDTO>{
 	private int userId;
 	private String location;
 	private String vehicleNo;
+	private int parkingInfoId;
 	private String vehicleType;
 	private String engineType;
 	private String classification;
@@ -32,6 +35,7 @@ public class UserParkingDTO implements Serializable, Comparable<UserParkingDTO>{
 	private String contentType;
 	private String createdDate;
 	private String updatedDate;
+	public  LocalDateTime setExpiryDate;
 	private boolean isActive;
 	
 	public UserParkingDTO() {
@@ -43,4 +47,13 @@ public class UserParkingDTO implements Serializable, Comparable<UserParkingDTO>{
 		location.compareTo(o.getLocation());
 		return 0;
 	}
+
+	public void setExpiryDate(String expiryDate) {
+	}
+
+	public String getExpiryDate() {
+        return "";
+    }
+
+
 }

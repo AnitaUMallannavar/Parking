@@ -10,7 +10,11 @@
 
         <!-- Add all your entity classes here -->
         <class>com.xworkz.parkingrental.entity.ParkingEntity</class>
-        <class>com.xworkz.parkingrental.entity.RentalEntity</class>
+        <class>com.xworkz.parkingrental.entity.ParkingInfoEntity</class>
+        <class>com.xworkz.parkingrental.entity.UserEntity</class>
+        <class>com.xworkz.parkingrental.entity.UserParkingEntity</class>
+
+
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

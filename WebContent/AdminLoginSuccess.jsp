@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html long="en">
+<html lang="en">
 <head>
 <!-- required meta tags -->
 <meta charset="utf-8">
@@ -14,14 +14,8 @@
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 
-<!-- CSS link -->
 <link rel="stylesheet" href="style.css">
-<title>Rental-Parking App</title>
-<style>
-.selector-for-some-widget {
-	box-sizing: content-box;
-}
-</style>
+<title>Rental-Parking Spot</title>
 <style>
 .footer {
 	position: fixed;
@@ -34,43 +28,66 @@
 	font-size: 14px;
 }
 body {
-    background-image: url('park3.jpg'); /* Relative or absolute URL */
-    background-size: cover; /* Ensures image covers the whole background */
+    background-image: url('park3.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Keeps background fixed while scrolling */
+    background-attachment: fixed;
     background-position: center center;
 }
 </style>
 </head>
 <body>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-		crossorigin="anonymous"></script>
+
+<!-- Navbar -->
 <nav class="navbar fixed-top navbar-dark bg-dark" style="height:50px;">
-		<div class="container-fluid">
-		<div class="navbar-header">
-			<img src="parking_PNG74.png" class="w3-bar w3-border" width="85"
-				height="40" style="margin-top: -20px">
-				</div>
-			<div class="w3-bar w3-border" style="margin-left: 780px;margin-top: -20px;">
-			<a href="AdminLogin.jsp" class="btn btn-sm"
-					style="background-color: turquoise;">Sign-out</a></div>
-			<div class="navbar-left" class="w3-bar w3-border">
-			<p class="navbar-text" style="color:white;font-size: 15px;">Welcome, ${sessionDTO.name}</p>
-			</div>
+	<div class="container-fluid d-flex justify-content-between align-items-center">
+		<!-- Logo -->
+		<img src="parking_PNG74.png" width="85" height="40" alt="Logo" class="me-3">
+
+		<!-- Sign-out first, then Admin Name -->
+		<div class="d-flex align-items-center">
+			<a href="AdminLogin.jsp" class="btn btn-outline-light btn-sm me-2">
+				Sign-out
+			</a>
+			<p class="navbar-text text-white mb-0 small">
+				Welcome, ${sessionDTO.name}
+			</p>
 		</div>
-</nav>
-<div> 
-<button class="btn" type="submit" onclick="window.location.href='onStart';" style="background-color: turquoise;color:black;position:absolute; top:15%; left:1%;">Update Parking Info</button>
-<button class="btn" type="submit" onclick="window.location.href='AdminViewData.jsp';" style="background-color: turquoise;color:black;position:absolute; top:25%; left:1%;">View Data</button>
-</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
-	<div class="footer">
-		<small style="color:white;">&copy; Created by: Anita U Mallannavar,</small><small style="color:white;">&ensp;anitaum007@gmail.com</small><small style="color:green;"> | Last login time: ${sessionDTO.loginTime}</small>
 	</div>
+</nav>
+
+<!-- Buttons Section -->
+<div class="container mt-5 pt-5">
+	<div class="row justify-content-start g-3">
+		<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<button class="btn btn-info w-100 shadow fw-semibold" type="button"
+				onclick="window.location.href='onStart';">
+				<i class="bi bi-pencil-square me-1"></i> Update Parking Info
+			</button>
+		</div>
+		<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<button class="btn btn-success w-100 shadow fw-semibold" type="button"
+				onclick="window.location.href='AdminViewData.jsp';">
+				<i class="bi bi-table me-1"></i> View Data
+			</button>
+		</div>
+	</div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+	<small class="text-white">&copy; Created by: Anita U Mallannavar,</small>
+	<small class="text-white">&ensp;anitaum007@gmail.com</small>
+	<small class="text-success"> | Last login time: ${sessionDTO.loginTime}</small>
+</div>
+
+<!-- Bootstrap JS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+	crossorigin="anonymous"></script>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </body>
 </html>

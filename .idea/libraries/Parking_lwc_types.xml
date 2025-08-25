@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="parking-rental-app/lwc_types">
+  <library name="Parking/lwc_types">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/.illuminatedCloud/lwc/types" />
     </CLASSES>

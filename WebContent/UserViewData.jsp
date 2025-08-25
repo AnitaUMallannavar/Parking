@@ -17,7 +17,7 @@
 
 <!-- CSS link -->
 <link rel="stylesheet" href="style.css">
-<title>Rental-Parking App</title>
+<title>Rental-Parking Spot</title>
 <style>
 .selector-for-some-widget {
 	box-sizing: content-box;
@@ -44,7 +44,7 @@
 	<nav class="navbar fixed-top navbar-dark bg-dark" style="height: 50px;">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<img src="Xworkz-Logo.png" class="w3-bar w3-border" width="85"
+				<img src="parking_PNG74.png" class="w3-bar w3-border" width="85"
 					height="40" style="margin-top: -20px">
 			</div>
 			<div class="w3-bar w3-border"
@@ -144,7 +144,7 @@
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
 	<div class="footer">
-		<small style="color:white;">&copy; Created by: Savitri B Kandgal,</small><small style="color:white;">&ensp;Savitri.Kandgal@gmail.com</small>&ensp;|<small style="color:lightgreen;">&ensp;Last login time: ${userDto.updatedDate}</small>
+		<small style="color:white;">&copy; Created by: Anita U Mallannavar,</small><small style="color:white;">&ensp;anitaum007@gmail.com</small>&ensp;|<small style="color:lightgreen;">&ensp;Last login time: ${userDto.updatedDate}</small>
 	</div>
 </body>
 </html>

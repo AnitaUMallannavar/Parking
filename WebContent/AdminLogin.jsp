@@ -1,217 +1,135 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html long="en">
+<html lang="en">
 <head>
-<!-- required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-	crossorigin="anonymous">
+<title>Rental-Parking Spot</title>
 
-<!-- CSS link -->
-<link rel="stylesheet" href="style.css">
-<title>Rental-Parking App</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
-.selector-for-some-widget {
-	box-sizing: content-box;
+/* Background video */
+.video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
-</style>
-<style>
+
+/* Glass effect card */
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+/* Card title */
+.card-title {
+    background: rgba(64, 224, 208, 0.8);
+    border-radius: 20px 20px 0 0;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Footer */
 .footer {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	background-color: black;
-	text-align: center;
-	height: 5%;
-	font-size: 14px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    text-align: center;
+    font-size: 14px;
+    padding: 5px;
+    color: #fff;
 }
-body {
-    background-image: url('park3.jpg'); /* Relative or absolute URL */
-    background-size: cover; /* Ensures image covers the whole background */
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Keeps background fixed while scrolling */
-    background-position: center center;
+
+/* Labels */
+.form-label {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Error text */
+.text-danger {
+    font-size: 0.85rem;
 }
 </style>
-<script>
-	function validateform() {
-		var email1 = document.myform.email.value;
-		var password = document.myform.password.value;
-		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z]{2,4})+$/;
-		var status = false;
+</head>
+<body>
 
-		if (email1 == "" && password.length < 1) {
-			document.getElementById('form').innerHTML = "*Please enter the credential";
-			document.getElementById('email1').innerHTML = "";
-			document.getElementById('password1').innerHTML = "";
-			status = false;
-		} else {
-			document.getElementById('form').innerHTML = "";
-			if (email1 == "") {
-				document.getElementById('email1').innerHTML = "*Please enter email-id";
-				status = false;
-			} else if (!filter.test(email1)) {
-				document.getElementById('email1').innerHTML = "*Please enter valid email-id";
-				status = false;
-			} else {
-				document.getElementById('email1').innerHTML = "";
-				status = true;
-			}
-			if (password.length < 1) {
-				document.getElementById('password1').innerHTML = "*Please enter Password";
-				status = false;
-			} else if (password.length < 6) {
-				document.getElementById('password1').innerHTML = "*Min length is 6 characters";
-				status = false;
-			} else {
-				document.getElementById('password1').innerHTML = "";
-			}
-		}
-		return status;
-	}
-</script>
-<script>
-	function emailValidation() {
-		var email1 = document.myform.email.value;
-		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z]{2,4})+$/;
-		var status = false;
+<!-- Background Video -->
+<video autoplay muted loop class="video-bg">
+    <source src="Parking.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 
-		if (email1 == "") {
-			document.getElementById('emailError').innerHTML = "*Please enter the email-id";
-			document.getElementById('form').innerHTML = "";
-			status = false;
-		} else if (!filter.test(email1)) {
-			document.getElementById('emailError').innerHTML = "*Please enter the valid email-id";
-			document.getElementById('form').innerHTML = "";
-			status = false;
-		} else {
-			document.getElementById('emailError').innerHTML = "";
-			document.getElementById('form').innerHTML = "";
-			status = true;
-		}
-		return status;
-	}
-</script>
-<script>
-	function validatePassword() {
-		var password = document.myform.password.value;
-		var status = false;
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <img src="parking_PNG74.png" width="85" height="40" alt="Logo">
+        <a href="Landing.jsp" class="btn btn-sm text-dark" style="background-color: turquoise;">Home</a>
+    </div>
+</nav>
 
-		if (password.length < 1) {
-			document.getElementById('password').innerHTML = "*Please enter the Password";
-			document.getElementById('form').innerHTML = "";
-			status = false;
-		} else if (password.length < 6) {
-			document.getElementById('password').innerHTML = "*Min length must be 6 characters";
-			document.getElementById('form').innerHTML = "";
-			status = false;
-		} else {
-			document.getElementById('password').innerHTML = "";
-			document.getElementById('form').innerHTML = "";
-		}
-		return status;
-	}
-</script>
-<script>
-	function clearData() {
+<!-- Login Card -->
+<div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-title text-center p-3">
+                <h3>Admin Login</h3>
+            </div>
+            <div class="card-body">
+                <form action="adminLogin" method="post" onsubmit="return validateform()" name="myform">
 
-		document.getElementById('form').innerHTML = "";
-		document.getElementById('email').innerHTML = "";
-		document.getElementById('password').innerHTML = "";
-	}
-</script>
-</head>	
-<body style="background-color: ;">
-	<nav class="navbar fixed-top navbar-dark" style="height: 50px;background-color: black;">
-		<div class="container-fluid">
-			<img src="parking_PNG74.png" class="w3-bar w3-border" width="85"
-				height="40">
-			<div class="navbar-left" class="w3-bar w3-border" style="margin-top: -5px;">
-				<a href="Landing.jsp" class="btn btn-sm"
-					style="background-color: turquoise;color:black">Home</a>
-			</div>
-		</div>
-	</nav>
+                    <!-- Global Error -->
+                    <div class="text-center mb-2">
+                        <span id="form" class="text-danger"></span>
+                        <span class="text-danger">${error}</span>
+                    </div>
 
-	<%-- 	<div class="login" style="background-color: white;">
-		<div style="color: black;" class="text-center">
-			<h4>Sign-in Form</h4>
-		</div>
-		<div class="tab-content">
-			<div class="tab-pane fade show active" id="pills-login"
-				role="tabpanel" aria-labelledby="tab-login">
-				<form name="myform" method="post" action="adminLogin"
-					onsubmit="return validateform()" class="row g-3 needs-validation"
-					novalidate>
-<span id="form" style="color:red;"></span><br/>	
-<h5 style=color:red;>${error}</h5>
-					<div>
-						<label class="form-label" for="email">Email address</label> 
-						<input type="email" id="email" name="email" class="form-control" onchange="emailValidation()"/>
-						<div class="invalid-feedback" id="emailError">Please provide a valid email</div>
-						<div class="form-group was-validated" id="validEmail"></div>
-						
-					</div>
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter email">
+                        <small id="email1" class="text-danger"></small>
+                    </div>
 
-					<div class="form-group was-validated">
-						<label class="form-label" for="password">Password</label>
-						<div class="invalid-feedback">Please enter your password</div>
-						<input class="form-control" type="password" id="password"
-							name="password">
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                        <small id="password1" class="text-danger"></small>
+                    </div>
 
-					</div>
-					<input class="btn w-50"
-						style="background-color: turquoise; margin-right: 80px; font-weight: bold;"
-						type="submit" value="SIGN IN">
-				</form>
-			</div>
-		</div>
-	</div> --%>
+                    <!-- Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn" style="background-color: turquoise; color:black; font-weight:bold;">
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-	<div class="container">
-		<div class="row justify-content-center mt-5" >
-			<div class="col-lg-4 col-md-8 col-sm-8" style="margin-top:-5%;">
-				<div class="card shadow " >
-					<div class="card-title text-center border-bottom" style="background-color: turquoise;">
-						<h3 class="p-2" style="color: black;">Admin Login</h3>
-					</div>
-					<div class="card-body">
-						<form action="adminLogin" method="post" onsubmit="return validateform()" name="myform">
-						<span id="form" style="color:red;"></span><span style=color:red;>${error}</span>
-							<div class="mb-4 shadow"> 
-								<input type="text" class="form-control" id="email" name="email" placeholder="Email address"/>
-								<span id="email1" style="color:red;"></span>
-							</div>
-							<div class="mb-4 shadow">
-								<input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
-								<span id="password1" style="color:red;"></span>
-							</div>
-							<div class="d-grid shadow" style="margin-left: 10%;margin-right: 10%;">
-							<button type="submit" class="btn w-60" style="background-color: turquoise;text-align: center;"><b>Login</b></button>
-							</div>
-						<div class="mb-3"></div>
-						<div class="mb-3" style="text-align: center;">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-		<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-		crossorigin="anonymous"></script>
-	<div class="footer">
-		<small style="color:white;"style="color:white;">&copy; Created by: Anita U Mallannavar,</small><small style="color:white;">&ensp;anitaum007@gmail.com</small>
-	</div>
+<!-- Footer -->
+<div class="footer">
+    &copy; Created by: Anita U Mallannavar | anitaum007@gmail.com
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

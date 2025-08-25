@@ -16,7 +16,7 @@
 
 <!-- CSS link -->
 <link rel="stylesheet" href="style.css">
-<title>Rental-Parking App</title>
+<title>Rental-Parking Spot</title>
 <style>
 .selector-for-some-widget {
 	box-sizing: content-box;
@@ -157,7 +157,7 @@ console.log("btn.disabled: "+btn.disabled);
 					</div>
 					<div class="card-body">
 						<form action="userRegistration" method="post" enctype="multipart/form-data">
-						
+
 				<div class="row ">
 							<div class="col-md-6 mt-md-0 mt-3">
 								<input type="text" id="name" name="name"
@@ -166,7 +166,7 @@ console.log("btn.disabled: "+btn.disabled);
 							</div>
 							<div class="col-md-6 mt-md-0 mt-3">
 								<input type="text" id="email" name="email"
-									placeholder="Enter Email-Id" onchange="EmailAjax()" class="form-control shadow required" onclick="enableSubmit()"/> 
+									placeholder="Enter Email-Id" onchange="EmailAjax()" class="form-control shadow required" onclick="enableSubmit()"/>
 									<span id="email" style="color: red;"></span>
 							</div>
 				</div>
@@ -174,12 +174,12 @@ console.log("btn.disabled: "+btn.disabled);
 				<div class="row">
 							<div class="col-md-6 mt-md-0 mt-3">
 								<input type="text" id="phoneNo" name="phoneNo" placeholder="Enter Contact-No."
-									 class="form-control shadow required" onclick="enableSubmit()"/> 
+									 class="form-control shadow required" onclick="enableSubmit()"/>
 									<span id="phoneNo" style="color: red;"></span>
 							</div>
 							<div class="col-md-6 mt-md-0 mt-3">
 								<input type="text" id="vehicleNo" name="vehicleNo"
-									placeholder="Enter vehicle No." class="form-control shadow required" onclick="enableSubmit()"/> 
+									placeholder="Enter vehicle No." class="form-control shadow required" onclick="enableSubmit()"/>
 									<span id="vehicleNo"
 									style="color: red;"></span>
 							</div>
@@ -195,8 +195,8 @@ console.log("btn.disabled: "+btn.disabled);
 									<option value="VijayaNagar">VijayaNagar</option>
 									<option value="BTM">BTM</option>
 								</select> <span id="location" style="color: red;"></span>
-							</div>		
-							
+							</div>
+
 						<div class="col-md-6 mt-md-0 mt-3">
 						<select name="classification" id="classification" class="form-select shadow required " onclick="enableSubmit()" aria-label="Default select example">
 									<option value="">Classification</option>
@@ -211,7 +211,7 @@ console.log("btn.disabled: "+btn.disabled);
 										<option value="Toyata">Toyata</option>
 									</optgroup>
 								</select> <span id="classification" style="color: red;"></span>
-							</div>													
+							</div>
 				</div>
 				<br/>
 				<div class="row">
@@ -221,14 +221,14 @@ console.log("btn.disabled: "+btn.disabled);
 									<option value="2_Wheeler">2-wheeler</option>
 									<option value="4_Wheeler">4-wheeler</option>
 						</select> <span id="vehicleType" style="color: red;"></span>
-				</div>	
+				</div>
 				<div class="col-md-6 mt-md-0 mt-3">
 						<select name="engineType" id="engineType" class="form-select shadow required " onclick="enableSubmit()" aria-label="Default select example">
 									<option value="">Engine Type</option>
 									<option value="Normal">Normal</option>
 									<option value="Electrical">Electrical</option>
 						</select> <span id="engineType" style="color: red;"></span>
-				</div>															
+				</div>
 				</div>
 				<br/>
 				<div class="row">
@@ -246,10 +246,10 @@ console.log("btn.disabled: "+btn.disabled);
 									<option value="360_days">360 Days</option>
 								</select> <span id="term" style="color: red;"></span>
 							</div>
-							
+
 							<div class="col-md-6 mt-md-0 mt-3">
 								<label for="price">Price:</label> <input type="text" id="price"
-									name="price" class="form-control shadow" style="background-color: ghostwhite;" readonly/> 
+									name="price" class="form-control shadow" style="background-color: ghostwhite;" readonly/>
 									<span id="price" style="color: red;"></span>
 							</div>
 				</div>
@@ -267,21 +267,21 @@ console.log("btn.disabled: "+btn.disabled);
 							</div>
 				</div>
 				<br/>
-				<div class="row" > 
+				<div class="row" >
 							<div class="col-md-10 mt-md-0 mt-3">
 								<label for="file">Upload vehicle pic:</label>
-								<input type="file" name="file" id="file" class="form-control shadow" style="background-color: ghostwhite;"> 
+								<input type="file" name="file" id="file" class="form-control shadow" style="background-color: ghostwhite;">
 									<span id="file" style="color: red;"></span>
-							</div>							
-				</div>	
-				<br/>			
+							</div>
+				</div>
+				<br/>
 				<div class="row" > <!-- style="margin-left: 35%;" -->
 							<div class="col-md-4 mt-md-0 mt-3">
 								<input type="checkbox" id="agreement" name="agreement" class="shadow required" onclick="enableSubmit()"/>
 								<label for="agreement" style="color:blue;">Agreement</label> <span id="agreement"
 									style="color: red;"></span>
 							</div>
-							
+
 				</div>
 				<br/>
 	<div class="row" style="margin-left: 25%;">
@@ -291,7 +291,7 @@ console.log("btn.disabled: "+btn.disabled);
 						</button>&ensp;&ensp;&ensp;
 						<button type="Reset" class="btn w-30 shadow" style="background-color: turquoise;color:black;;text-align: center;">
 						Reset
-						</button>	
+						</button>
 			</div>
 	</div>
 					</form>

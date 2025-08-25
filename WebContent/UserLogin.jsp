@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html long="en">
+<html lang="en">
 <head>
 <!-- required meta tags -->
 <meta charset="utf-8">
@@ -16,217 +16,169 @@
 
 <!-- CSS link -->
 <link rel="stylesheet" href="style.css">
-<title>Rental-Parking App</title>
+<title>Rental-Parking Spot</title>
 <style>
 .selector-for-some-widget {
 	box-sizing: content-box;
 }
-</style>
-<style>
+
+/* Background video */
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.video-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -1; /* keep video behind content */
+}
+
+.content {
+	position: relative;
+	z-index: 1;
+	color: #fff;
+}
+
+/* Footer */
 .footer {
 	position: fixed;
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	background-color: black;
+	background-color: rgba(0, 0, 0, 0.8);
 	text-align: center;
-  	height: 5%;
-  	font-size: 14px;
-}
-body {
-    background-image: url('park3.jpg'); /* Relative or absolute URL */
-    background-size: cover; /* Ensures image covers the whole background */
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Keeps background fixed while scrolling */
-    background-position: center center;
+	height: 5%;
+	font-size: 14px;
+	z-index: 2;
 }
 </style>
 <script>
 function enableSubmit(){
 	console.log("enableSubmit() logged-in");
-let input = document.getElementById('email'); // Enter your class name for a required field, this should also be reflected within your form fields.
-console.log("input: "+input);
-let btn = document.querySelector('input[type="submit"]');
-console.log("btn: "+btn);
-let isValid = true;
-//for (var i = 0; i < inputs.length; i++){
-//let changedInput = inputs[i];
-let changedInput = input;
-console.log("changedInput: "+changedInput);
-if (changedInput.value.trim() === "" || changedInput.value === null){
-isValid = false;
-//break;
-//}
+	let input = document.getElementById('email');
+	let btn = document.querySelector('input[type="submit"]');
+	let isValid = true;
+	let changedInput = input;
+	if (changedInput.value.trim() === "" || changedInput.value === null){
+		isValid = false;
+	}
+	btn.disabled = !isValid;
 }
-btn.disabled = !isValid;
-console.log("btn.disabled: "+btn.disabled);
+
+function enableOTPSubmit(){
+	console.log("enableOTPSubmit() logged-in");
+	let input = document.getElementById('otp');
+	let btn = document.getElementById('OtpSubmitBtn');
+	let isValid = true;
+	let changedInput = input;
+	if (changedInput.value.trim() === "" || changedInput.value === null){
+		isValid = false;
+	}
+	btn.disabled = !isValid;
 }
 </script>
 <script>
-function enableOTPSubmit(){
-	console.log("enableOTPSubmit() logged-in");
-let input = document.getElementById('otp'); // Enter your class name for a required field, this should also be reflected within your form fields.
-console.log("input: "+input);
-let btn = document.getElementById('OtpSubmitBtn');
-console.log("btn: "+btn);
-let isValid = true;
-//for (var i = 0; i < inputs.length; i++){
-//let changedInput = inputs[i];
-let changedInput = input;
-console.log("changedInput: "+changedInput);
-if (changedInput.value.trim() === "" || changedInput.value === null){
-isValid = false;
-//break;
-//}
-}
-btn.disabled = !isValid;
-console.log("btn.disabled: "+btn.disabled);
-}
-</script>
-<script> 
 function EmailAjax(){
-console.log("EmailAjax logged-in");
-var email=document.getElementById("email").value;
-var url="http://localhost:8080/parking-rental-app/validateEmailForOPT/"+email;
-console.log(url);
-const xmlHttp=new XMLHttpRequest();
-xmlHttp.open("GET", url);
-xmlHttp.send();
-xmlHttp.onload=function(){
-	console.log(this.responseText);
-	document.getElementById("emailDisplay").innerHTML=this.responseText;	
-}
+	var email=document.getElementById("email").value;
+	var url="http://localhost:8080/parking-rental-app/validateEmailForOPT/"+email;
+	const xmlHttp=new XMLHttpRequest();
+	xmlHttp.open("GET", url);
+	xmlHttp.send();
+	xmlHttp.onload=function(){
+		document.getElementById("emailDisplay").innerHTML=this.responseText;
+	}
 }
 
 function OTPAjax(){
-console.log("OTPAjax logged-in");
-var otp=document.getElementById("otp").value;
-//var url="http://localhost:8080/parking-rental-app/validateOTP/"+email+"/"+otp;
-var url="http://localhost:8080/parking-rental-app/validateOTP/"+otp;
-console.log(url);
-const xmlHttp=new XMLHttpRequest();
-xmlHttp.open("POST", url);
-xmlHttp.send();
-xmlHttp.onload=function(){
-	console.log(this.responseText);
-	document.getElementById("OtpDisplay").innerHTML=this.responseText;	
+	var otp=document.getElementById("otp").value;
+	var url="http://localhost:8080/parking-rental-app/validateOTP/"+otp;
+	const xmlHttp=new XMLHttpRequest();
+	xmlHttp.open("POST", url);
+	xmlHttp.send();
+	xmlHttp.onload=function(){
+		document.getElementById("OtpDisplay").innerHTML=this.responseText;
+	}
 }
-}
-</script>
-<script>
-    var mins=.1;
-    var secs=mins*60;
-    function countdown() {
-        setTimeout('Decrement()',60);
-    }
-    function Decrement() {
-        if(document.getElementById) {
-            minutes=document.getElementById("minutes");
-            seconds=document.getElementById("seconds");
-            if(seconds<59) {
-                seconds.value=secs;
-            }
-            else {
-                minutes.value=getminutes();
-                seconds.value=getseconds();
-            }
-            if(mins<1) {
-                minutes.style.color="red";
-                seconds.style.color="red";
-            }
-            if(mins<0) {
-                alert('time up');
-                minutes.value=0;
-                seconds.value=0;
-            }
-            else {
-                secs--;
-                setTimeout('Decrement()',1000);
-            }
-        }
-    }
- 
-    function getminutes() {
-        mins=Math.floor(secs/60);
-        return mins;
-    }
- 
-    function getseconds() {
-        return secs-Math.round(mins*60);
-    }
 </script>
 </head>
 <body>
-	<nav class="navbar fixed-top navbar-dark bg-dark" style="height: 50px;">
-		<div class="container-fluid">
-			<img src="parking_PNG74.png" class="w3-bar w3-border" width="85" height="50">
-			<div class="navbar-left" class="w3-bar w3-border" style="margin-top: -5px;">
-				<a href="UserHome.jsp" class="btn btn-sm"
-					style="background-color: turquoise;">Home</a>
+	<!-- Background video -->
+	<video autoplay muted loop class="video-bg">
+		<source src="Parking.mp4" type="video/mp4">
+		Your browser does not support the video tag.
+	</video>
+
+	<!-- Page Content -->
+	<div class="content">
+		<nav class="navbar fixed-top navbar-dark bg-dark" style="height: 50px;">
+			<div class="container-fluid">
+				<img src="parking_PNG74.png" class="w3-bar w3-border" width="85" height="50">
+				<div class="navbar-left" style="margin-top: -5px;">
+					<a href="UserHome.jsp" class="btn btn-sm"
+						style="background-color: turquoise;">Home</a>
+				</div>
 			</div>
-		</div>
-	</nav>
-<!-- 				    <div style="display: flex; width:80%;
-                justify-content:center; padding-top: 0%;">
-       			 Time Left ::
-			    </div>
-			    <div style="display: flex; width:80%;
-			                justify-content:center; padding-top: 0%;">
-			        <input id="minutes" type="text" style="width: 2%; border: none; font-size: 16px;
-			                      font-weight: bold; color: black;">
-			        <font size="5">
-			            :
-			        </font>
-			        <input id="seconds" type="text" style="width: 2%; border: none; font-size: 16px;
-			                      font-weight: bold; color: black;">
-			    </div> -->
+		</nav>
+
 		<div class="container">
-		<div class="row justify-content-center mt-5" >
-			<div class="col-lg-6 col-md-8 col-sm-8" style="margin-top:-5%;">
-			<span style="color:blue;margin-right: 20%;"><b>${generateOtpSuccess}</b></span>
-			<span style="color:red;margin-left: -20%;"><b>${generateOtpError}</b></span>
-			<span style="color:red	;margin-right: 20%;"><b>${acctLocked}</b></span>
-			<span style="color:red	;margin-left: -20%;"><b>${otpExpired}</b></span>
-				<div class="card shadow" style="width: 400px;">
-					<div class="card-title text-center border-bottom" style="background-color: turquoise;">
-						<h3 class="p-2" style="color: black;">User Login</h3>
-					</div>
-					<div class="card-body">
-				
-<form action="generateOTPAndLogin" method="post" class="container center" style="margin-right: 50px">
-<span style="color:red;font-size: 12px;" id="emailDisplay">${emailError}</span> 
-						<div class="row">
-							<div class="col-md-7 mt-md-0 mt-3"> 
-								<input type="text"  class="form-control shadow" onkeyup="enableSubmit()" id="email" name="email" value="${mail}" placeholder="Enter email address" onchange="EmailAjax()"/>
-								<span id="email" style="color:red;"></span>
-							</div>
-							<div class="col-md-4 mt-md-0 mt-3">
-							<input type="submit" name="generateOtp" value="Generate OTP" class="btn w-60 shadow" style="background-color: turquoise;text-align: center;" disabled><!--  Generate OTP</button> -->
-							</div>
-						</div>	
-<br/><span style="color:red;font-size: 12px;" id="OtpDisplay">${otpError}</span>
-						<div class="row">
-							<div class="col-md-7 mt-md-0 mt-3"> 
-								<input type="text" class="form-control shadow" id="otp" name="otp" onkeyup="enableOTPSubmit()" placeholder="Enter OTP" onchange="OTPAjax()"/>
-								<span id="otp" style="color:red;"></span>
-							</div>
-							<div class="col-md-4 mt-md-0 mt-2">
-								<input type="submit" name="login" value="Login" id="OtpSubmitBtn" class="btn w-60 shadow" style="background-color: turquoise;text-align: center;" disabled>
-								<!-- <a href="userLoginSuccess" class="btn w-60 shadow" style="background-color: turquoise;text-align: center;">send</a> -->
-							</div>
+			<div class="row justify-content-center mt-5">
+				<div class="col-lg-6 col-md-8 col-sm-8" style="margin-top:-5%;">
+					<span style="color:blue;margin-right: 20%;"><b>${generateOtpSuccess}</b></span>
+					<span style="color:red;margin-left: -20%;"><b>${generateOtpError}</b></span>
+					<span style="color:red;margin-right: 20%;"><b>${acctLocked}</b></span>
+					<span style="color:red;margin-left: -20%;"><b>${otpExpired}</b></span>
+
+					<div class="card shadow" style="width: 400px;">
+						<div class="card-title text-center border-bottom" style="background-color: turquoise;">
+							<h3 class="p-2" style="color: black;">User Login</h3>
 						</div>
-						</form>
+						<div class="card-body">
+							<form action="generateOTPAndLogin" method="post" class="container center" style="margin-right: 50px">
+								<span style="color:red;font-size: 12px;" id="emailDisplay">${emailError}</span>
+								<div class="row">
+									<div class="col-md-7 mt-md-0 mt-3">
+										<input type="text"  class="form-control shadow" onkeyup="enableSubmit()" id="email" name="email" value="${mail}" placeholder="Enter email address" onchange="EmailAjax()"/>
+									</div>
+									<div class="col-md-4 mt-md-0 mt-3">
+										<input type="submit" name="generateOtp" value="Generate OTP" class="btn w-60 shadow" style="background-color: turquoise;text-align: center;" disabled>
+									</div>
+								</div>
+
+								<br/><span style="color:red;font-size: 12px;" id="OtpDisplay">${otpError}</span>
+								<div class="row">
+									<div class="col-md-7 mt-md-0 mt-3">
+										<input type="text" class="form-control shadow" id="otp" name="otp" onkeyup="enableOTPSubmit()" placeholder="Enter OTP" onchange="OTPAjax()"/>
+									</div>
+									<div class="col-md-4 mt-md-0 mt-2">
+										<input type="submit" name="login" value="Login" id="OtpSubmitBtn" class="btn w-60 shadow" style="background-color: turquoise;text-align: center;" disabled>
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- Footer -->
+		<div class="footer">
+			<small style="color: white;">&copy; Created by: </small>
+			<small style="color: white;">Anita U Mallannavar,</small>
+			<small style="color: white;">&ensp;anitaum007@gmail.com</small>
+		</div>
 	</div>
+
+	<!-- Bootstrap JS -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
-	<div class="footer">
-	<small style="color: white;">&copy;Created by: </small><small style="color: white;">Anita U Mallannavar,</small><small style="color: white;">&ensp;anitaum007@gmail.com</small>
-	</div>
 </body>
 </html>

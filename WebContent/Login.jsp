@@ -16,7 +16,7 @@
 
 <!-- CSS link -->
 <link rel="stylesheet" href="style.css">
-<title>Rental-Parking App</title>
+<title>Rental-Parking Spot</title>
 <style>
 .selector-for-some-widget {
 	box-sizing: content-box;

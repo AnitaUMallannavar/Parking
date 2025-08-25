@@ -25,6 +25,7 @@ public class ParkingInfoDTO implements Serializable, Comparable<ParkingInfoDTO> 
 	private String term;
 	private int price;
 	private String discount;
+	private int slots;
 	
 	public ParkingInfoDTO() {
 		log.info("Created: "+getClass().getSimpleName());

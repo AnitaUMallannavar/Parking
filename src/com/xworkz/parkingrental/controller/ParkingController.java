@@ -177,35 +177,45 @@ public class ParkingController {
 		return "UserLogin";
 	}
 
-	// add user parking info
 	@RequestMapping("addUserParkingInfo")
-	public String onAddUserParkingInfo(UserParkingDTO upDto, Model model, MultipartFile file, HttpServletRequest req) throws FileNotFoundException, IOException {
+	public String onAddUserParkingInfo(UserParkingDTO upDto, Model model, MultipartFile file, HttpServletRequest req) throws IOException {
 		log.info("controller: running onAddUserParkingInfo()");
 		UserParkingDTO dto = service.findByVehicleNo(upDto.getVehicleNo());
+
 		if (dto == null || !dto.isActive()) {
 			log.info("controller: onAddUserParkingInfo(): new vehicle");
-			
-			upDto.setFileName(System.currentTimeMillis()+"_"+file.getOriginalFilename());
+
+			upDto.setFileName(System.currentTimeMillis() + "_" + file.getOriginalFilename());
 			upDto.setOriginalFileName(file.getOriginalFilename());
 			upDto.setContentType(file.getContentType());
-			
+
 			File physicalFile = new File(FileConstant.FILE_LOCATION + upDto.getFileName());
 			try (OutputStream os = new FileOutputStream(physicalFile)) {
 				os.write(file.getBytes());
 			}
+
 			HttpSession session = req.getSession();
 			Object mail = session.getAttribute("emailId");
-			log.info("controller: onAddUserParkingInfo(): mailid of line#133: "+mail);
-			service.addUserParkingInfo(upDto, (String)mail);
-			model.addAttribute("success", "Parking slot booked!");
+			log.info("controller: onAddUserParkingInfo(): mailid of line#133: " + mail);
+
+			String response = service.addUserParkingInfo(upDto, (String) mail);
+
+			if (response.contains("successfully")) {
+				model.addAttribute("success", response);
+			} else {
+				model.addAttribute("error", response);
+			}
+
 			return "UserParkingInfo";
 		}
+
 		log.info("controller: onAddUserParkingInfo(): This vehicle is already parked");
 		model.addAttribute("error", "*This vehicle is already parked");
 		return "UserParkingInfo";
 	}
 
-	// view user data
+
+
 	@GetMapping("userViewData")
 	public String onUserViewData(Model model, HttpServletRequest req) {
 		log.info("onUserViewData()");

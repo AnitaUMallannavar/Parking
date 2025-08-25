@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html long="en">
+<html lang="en">
 <head>
 <!-- required meta tags -->
 <meta charset="utf-8">
@@ -17,12 +17,7 @@
 
 <!-- CSS link -->
 <link rel="stylesheet" href="style.css">
-<title>Rental-Parking App</title>
-<style>
-.selector-for-some-widget {
-	box-sizing: content-box;
-}
-</style>
+<title>Rental-Parking Spot</title>
 <style>
 .footer {
 	position: fixed;
@@ -35,59 +30,58 @@
 	font-size: 14px;
 }
 body {
-     background-image: url('park3.jpg'); /* Relative or absolute URL */
-     background-size: cover; /* Ensures image covers the whole background */
+     background-image: url('park3.jpg');
+     background-size: cover;
      background-repeat: no-repeat;
-     background-attachment: fixed; /* Keeps background fixed while scrolling */
+     background-attachment: fixed;
      background-position: center center;
- }
-
+}
 </style>
 <script>
-function validateLocation()
-{  
-var location=document.form.location.value;  
-console.log("location: "+location);
-var status=false;
- 
-		if (location=="" || location==null)
-		{
-		document.getElementById('lc').innerHTML="*Please select the location";
-		status=false;  
-		}else{
-			document.getElementById('lc').innerHTML="";
-			status=true;
-			}
-		console.log("status: "+status);
-		return status;
+function validateLocation() {
+    var location=document.form.location.value;
+    var status=false;
+    if (location=="" || location==null){
+        document.getElementById('lc').innerHTML="*Please select the location";
+        status=false;
+    } else {
+        document.getElementById('lc').innerHTML="";
+        status=true;
+    }
+    return status;
 }
 </script>
 </head>
-<body style="margin-top:5%;margin-bottom: 5%">
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-		crossorigin="anonymous"></script>
-<nav class="navbar fixed-top navbar-dark bg-dark" style="height:50px;">
-		<div class="container-fluid">
-		<div class="navbar-header">
-			<img src="parking_PNG74.png" class="w3-bar w3-border" width="85"
-				height="40" style="margin-top: -20px">
-				</div>
-			<div class="w3-bar w3-border" style="margin-left: 780px;margin-top: -20px;">
-			<a href="AdminLoginSuccess.jsp" class="btn btn-sm"
-					style="background-color: turquoise;">Home</a></div>
-			<div class="navbar-left" class="w3-bar w3-border">
-			<p class="navbar-text" style="color:white;font-size: 15px;">Welcome, ${sessionDTO.name}</p>
-			</div>
+<body class="mt-5 mb-5">
+
+<!-- Bootstrap Navbar -->
+<nav class="navbar fixed-top navbar-dark bg-dark">
+	<div class="container-fluid d-flex justify-content-between align-items-center">
+
+		<!-- Left side Logo -->
+		<div class="d-flex align-items-center">
+			<img src="parking_PNG74.png" width="85" height="40" alt="Logo">
 		</div>
+
+		<!-- Right side content -->
+		<div class="d-flex align-items-center">
+			<a href="AdminLoginSuccess.jsp" class="btn btn-sm text-white me-3" style="background-color: turquoise;">
+				Home
+			</a>
+			<p class="navbar-text text-white mb-0" style="font-size: 15px;">Welcome, ${sessionDTO.name}</p>
+		</div>
+	</div>
 </nav>
-<div class="card-body" style="margin-left: 0%;margin-right: 0%;"> <!-- background-color:pink; -->
-	<form name="form" action="viewData" onsubmit="return validateLocation()" class="container center" style="margin-right: 50px;">
-	<span id="lc" style="color:red;margin-left: 25%;font-size: 13px;"></span>
-	<div class="row" style="margin-left: 0%;margin-bottom: 40px;"> <!-- background-color:yellow; -->
-		<div class="col-md-3 mt-md-0 mt-3" style="margin-left: 28%;">
-			<select name="location" id="location" class="form-select shadow required" onkeyup="enableSubmit()" aria-label="Default select example">
+
+<div class="container mt-5 pt-5">
+
+	<!-- Form Row -->
+	<form name="form" action="viewData" onsubmit="return validateLocation()" class="row g-3 justify-content-center">
+		<div class="col-12 text-center">
+			<span id="lc" class="text-danger small"></span>
+		</div>
+		<div class="col-12 col-md-4">
+			<select name="location" id="location" class="form-select shadow required">
 				<option value="">Location</option>
 				<option value="RajajiNagar">RajajiNagar</option>
 				<option value="E.city">E.city</option>
@@ -95,57 +89,59 @@ var status=false;
 				<option value="BTM">BTM</option>
 			</select>
 		</div>
-		<div class="col-md-3 mt-md-0 mt-2">
-			<input type="submit" value="Search" id="OtpSubmitBtn" class="btn w-60 shadow" style="background-color: turquoise;text-align: center;">
+		<div class="col-12 col-md-2 text-center">
+			<input type="submit" value="Search" class="btn w-100 shadow" style="background-color: turquoise;">
 		</div>
-	</div>
 	</form>
-	
-<div style="margin-left: 21%;">
-<b style="color:red;">${error}</b><b style="color:blue;">${size}</b></div>
-<div class="row" style="margin-left: 0%;"></div> <!--background-color:blue;  -->
-<table class="table w-auto table-bordered" style="margin-left: 21%;margin-right: -10%;">
-<thead> <!-- class="table-dark" -->
-<tr>
-<!-- <th scope="col">#</th> -->
-<th scope="col" style="background-color: turquoise;">Location</th>
-<th scope="col" style="background-color: turquoise;">Vehicle-type</th>
-<th scope="col" style="background-color: turquoise;">Engine-type</th>
-<th scope="col" style="background-color: turquoise;">Classification</th>
-<th scope="col" style="background-color: turquoise;">Term</th>
-<th scope="col" style="background-color: turquoise;">Price</th>
-<th scope="col" style="background-color: turquoise;">Discount</th>
-</tr>
-  </thead>
-<tbody style="text-align: center;">
-<c:forEach items="${list}" var="dto">
-<tr>
-<!-- <th scope="row"></th> -->
-<td>${dto.location}</td>
-<td>${dto.vehicleType}</td>
-<td>${dto.engineType}</td>
-<td>${dto.classification}</td>
-<td>${dto.term}</td>
-<td>${dto.price}</td>
-<td>${dto.discount}</td>
-</tr>
-</c:forEach>
-</tbody>
-</table>
+
+	<!-- Error / Size Message -->
+	<div class="text-center mt-3">
+		<b class="text-danger">${error}</b> <b class="text-primary">${size}</b>
+	</div>
+
+	<!-- Table -->
+	<div class="table-responsive mt-4">
+		<table class="table table-bordered text-center align-middle">
+			<thead>
+				<tr class="table-info">
+					<th>Location</th>
+					<th>Vehicle-type</th>
+					<th>Engine-type</th>
+					<th>Classification</th>
+					<th>Term</th>
+					<th>Price</th>
+					<th>Discount</th>
+					<th>slots</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="dto">
+				<tr>
+					<td>${dto.location}</td>
+					<td>${dto.vehicleType}</td>
+					<td>${dto.engineType}</td>
+					<td>${dto.classification}</td>
+					<td>${dto.term}</td>
+					<td>${dto.price}</td>
+					<td>${dto.discount}</td>
+			        <td>${dto.slots}</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </div>
-<%-- <div>
-	<form name="form" action="viewData" onsubmit="return validateLocation()">
-	<span id="lc" style="color:red;"></span><br/>
-<input type="text" name="location"/>
-<input class="btn w-40" style="background-color: turquoise; margin-right: 80px; font-weight: bold;" type="submit" value="Search"/>
-	</form>
-	</div> --%>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
-	<div class="footer">
-		<small style="color:white;">&copy; Created by: Anita U Mallannavar,</small><small style="color:white;">&ensp;anitaum007@gmail.com</small><small style="color:green;"> | Last login time: ${sessionDTO.loginTime}</small>
-	</div>
+
+<!-- Footer -->
+<div class="footer">
+	<small class="text-white">&copy; Created by: Anita U Mallannavar,</small>
+	<small class="text-white"> anitaum007@gmail.com</small>
+	<small class="text-success"> | Last login time: ${sessionDTO.loginTime}</small>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+	crossorigin="anonymous"></script>
 </body>
 </html>

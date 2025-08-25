@@ -12,7 +12,10 @@ public interface ParkingRepo {
 	default boolean updateLoginTime(ParkingEntity entity) {
 		return false;
 	}
-	
+
+	ParkingInfoEntity findByParkingInfoId(int id);
+
+
 	default List<ParkingEntity> find(){
 		return Collections.emptyList();
 	}
@@ -20,13 +23,9 @@ public interface ParkingRepo {
 	default ParkingEntity findByEmail(String email) {
 		return null;
 	}
+
 	
-	//to update parking info
-	default ParkingInfoEntity findByLocationAndVehicleTypeAndEngineTypeAndClsAndTerm(String location, String vehicleType, String engineType, String classification, String term) {
-		return null;
-	}
-	
-	default boolean saveParkingInfo(ParkingInfoEntity entity) {
+	default boolean saveParkingInfo(ParkingInfoEntity entity){
 		return false;
 	}
 	
@@ -42,11 +41,9 @@ public interface ParkingRepo {
 	default boolean saveUserData(UserEntity entity) {
 		return false;
 	}
-	
 	default boolean saveUserParkingInfo(UserParkingEntity entity) {
 		return false;
 	}
-	
 	default boolean updateUserEntity(UserEntity entity) {
 		return false;
 	}

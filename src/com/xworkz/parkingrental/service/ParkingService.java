@@ -8,6 +8,8 @@ import com.xworkz.parkingrental.dto.ParkingInfoDTO;
 import com.xworkz.parkingrental.dto.UserDTO;
 import com.xworkz.parkingrental.dto.UserParkingDTO;
 
+import javax.transaction.Transactional;
+
 public interface ParkingService {
 
 	default ParkingDTO validateCredential(String email, String password) {
@@ -61,10 +63,10 @@ public interface ParkingService {
 	default UserParkingDTO findByVehicleNo(String vehicleNo) {
 		return null;
 	}
-	
-	default boolean addUserParkingInfo(UserParkingDTO uParkingDto, String email) {
-		return false;
-	}
+
+
+	public String addUserParkingInfo(UserParkingDTO uParkingDto, String email);
+
 	
 	default boolean updateUserParkingInfo(UserParkingDTO upDto, String vNo) {
 		return false;
@@ -74,4 +76,9 @@ public interface ParkingService {
 	default boolean deleteUserParkingEntityByVehicleNo(String vNo) {
 		return false;
 	}
-}
+
+	default boolean existsForUserAndVehicle(Integer userId, String vehicleNo) {
+		return false;
+	}
+
+	}

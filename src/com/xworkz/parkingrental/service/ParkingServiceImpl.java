@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.xworkz.parkingrental.repository.ParkingInfoRepo;
+import com.xworkz.parkingrental.util.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +22,11 @@ import com.xworkz.parkingrental.entity.ParkingInfoEntity;
 import com.xworkz.parkingrental.entity.UserEntity;
 import com.xworkz.parkingrental.entity.UserParkingEntity;
 import com.xworkz.parkingrental.repository.ParkingRepo;
-import com.xworkz.parkingrental.util.GenerateOTP;
-import com.xworkz.parkingrental.util.ParkingEmail;
-import com.xworkz.parkingrental.util.UserOTPMail;
-import com.xworkz.parkingrental.util.UserParkingEmail;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
+
+import javax.transaction.Transactional;
 
 @Service
 @Slf4j
@@ -39,6 +40,10 @@ public class ParkingServiceImpl implements ParkingService {
 	private UserParkingEmail userParkingEmail;
 	@Autowired
 	private UserOTPMail userOTPMail;
+
+
+	@Autowired
+	private ParkingInfoRepo parkingInfoRepo;
 
 	public ParkingServiceImpl() {
 		log.info("Created: " + getClass().getSimpleName());
@@ -63,6 +68,7 @@ public class ParkingServiceImpl implements ParkingService {
 					entity.setLoginTime(formattedDate);
 					repo.updateLoginTime(entity);
 
+					
 					// getting entity with login-time
 					ParkingEntity entity2 = repo.findByEmail(email);
 
@@ -82,11 +88,12 @@ public class ParkingServiceImpl implements ParkingService {
 		return null;
 	}
 
-	public ParkingInfoDTO isExist(String location, String vehicleType, String engineType, String classification,
-			String term) {
+	public ParkingInfoDTO isExist(String location, String vehicleType, String engineType,
+								  String classification, String term) {
 		log.info("running isExist()");
-		ParkingInfoEntity record = repo.findByLocationAndVehicleTypeAndEngineTypeAndClsAndTerm(location, vehicleType,
-				engineType, classification, term);
+		ParkingInfoEntity record = parkingInfoRepo.findByLocationAndVehicleTypeAndEngineTypeAndClsAndTermAndSlots(
+				location, vehicleType, engineType, classification, term);
+
 		if (record != null) {
 			log.info("data is already exist");
 			ParkingInfoDTO dto = new ParkingInfoDTO();
@@ -97,9 +104,11 @@ public class ParkingServiceImpl implements ParkingService {
 	}
 
 	public boolean saveParkingInfo(ParkingInfoDTO dto) {
-		log.info("running isExist()");
-		ParkingInfoEntity record = repo.findByLocationAndVehicleTypeAndEngineTypeAndClsAndTerm(dto.getLocation(),
-				dto.getVehicleType(), dto.getEngineType(), dto.getClassification(), dto.getTerm());
+		log.info("running saveParkingInfo()");
+		ParkingInfoEntity record = parkingInfoRepo.findByLocationAndVehicleTypeAndEngineTypeAndClsAndTermAndSlots(
+				dto.getLocation(), dto.getVehicleType(), dto.getEngineType(),
+				dto.getClassification(), dto.getTerm());
+
 		if (record != null) {
 			log.info("data is already exist");
 			return false;
@@ -107,6 +116,7 @@ public class ParkingServiceImpl implements ParkingService {
 			log.info("data does not exist in db, saving new record");
 			ParkingInfoEntity entity = new ParkingInfoEntity();
 			BeanUtils.copyProperties(dto, entity);
+
 			boolean saved = repo.saveParkingInfo(entity);
 			if (saved) {
 				log.info("Service: data saved");
@@ -116,6 +126,7 @@ public class ParkingServiceImpl implements ParkingService {
 			return false;
 		}
 	}
+
 
 	public List<ParkingInfoDTO> findByLocation(String location) {
 		log.info("service: running findByLocation()");
@@ -163,18 +174,18 @@ public class ParkingServiceImpl implements ParkingService {
 			BeanUtils.copyProperties(userDto, userEntity);
 			repo.saveUserData(userEntity);
 
-			UserParkingEntity upEntity = new UserParkingEntity();
-			UserEntity userByEmail = repo.findByUserEmail(userDto.getEmail());
-			upDto.setUserId(userByEmail.getId());
-			upDto.setCreatedDate(formattedDate);
-			upDto.setUpdatedDate(formattedDate);
-			
-			BeanUtils.copyProperties(upDto, upEntity);
-			upEntity.setActive(true);
-			
-			repo.saveUserParkingInfo(upEntity);
-			userParkingEmail.sendMail(userDto.getEmail(), userDto.getName(), upDto);
-			return true;
+//			UserParkingEntity upEntity = new UserParkingEntity();
+//			UserEntity userByEmail = repo.findByUserEmail(userDto.getEmail());
+//			upDto.setUserId(userByEmail.getId());
+//			upDto.setCreatedDate(formattedDate);
+//			upDto.setUpdatedDate(formattedDate);
+//
+//			BeanUtils.copyProperties(upDto, upEntity);
+//			upEntity.setActive(true);
+//
+//			repo.saveUserParkingInfo(upEntity);
+//			userParkingEmail.sendMail(userDto.getEmail(), userDto.getName(), upDto);
+//			return true;
 		}
 		return false;
 	}
@@ -276,31 +287,55 @@ public class ParkingServiceImpl implements ParkingService {
 		}
 		return null;
 	}
-
-	public boolean addUserParkingInfo(UserParkingDTO upDto, String email) {
+	@Transactional
+	public String addUserParkingInfo(UserParkingDTO upDto, String email) {
 		log.info("running addUserParkingInfo()");
+
 		UserEntity entityByEmail = repo.findByUserEmail(email);
 		if (entityByEmail != null) {
 			log.info("entityByEmail is not null");
-			
+
+			ParkingInfoEntity parkingInfo = parkingInfoRepo.findByLocationAndVehicleTypeAndEngineTypeAndClsAndTermAndSlots(
+					upDto.getLocation(),
+					upDto.getVehicleType(),
+					upDto.getEngineType(),
+					upDto.getClassification(),
+					upDto.getTerm()
+			);
+
+			if (parkingInfo == null) {
+				return "No parking configuration found!";
+			}
+
+			if (parkingInfo.getSlots() <= 0) {
+				return "Slots are not available!";
+			}
+
+			// Reduce slots
+			parkingInfo.setSlots(parkingInfo.getSlots() - 1);
+			parkingInfoRepo.saveParkingInfo(parkingInfo);
+
+			// Save UserParkingEntity
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
 			String formattedDate = dateFormat.format(new Date());
-			
+
 			upDto.setUserId(entityByEmail.getId());
 			upDto.setCreatedDate(formattedDate);
 			upDto.setUpdatedDate(formattedDate);
-			
+
 			UserParkingEntity upEntity = new UserParkingEntity();
 			BeanUtils.copyProperties(upDto, upEntity);
 			upEntity.setActive(true);
+
 			repo.saveUserParkingInfo(upEntity);
-			userParkingEmail.sendMail(email, entityByEmail.getName(), upDto);
-			return true;
+
+			return "Parking slot booked successfully!";
 		}
-		log.info("entityByEmail is not null");
-		return false;
+		return "User not found!";
 	}
-	
+
+
+
 	public boolean updateUserParkingInfo(UserParkingDTO upDto, String vNo) {
 		log.info("service: running updateUserParkingInfo()");
 		 UserParkingEntity entity = repo.findByVehicleNo(vNo);
