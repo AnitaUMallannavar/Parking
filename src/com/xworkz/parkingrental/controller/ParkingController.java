@@ -251,13 +251,14 @@ public class ParkingController {
 		outputStream.flush();
 	}
 
-	@PostMapping("/parkinginfoupdate/{vehicleNo}")
-	public String loadingUserParkingData(@PathVariable String vehicleNo, Model model) {
-		log.info("running loadingUserParkingData()");
+	@GetMapping("/parkinginfoupdate")
+	public String loadingUserParkingData(@RequestParam String vehicleNo, Model model) {
+		log.info("running loadingUserParkingData() with vehicleNo=" + vehicleNo);
 		UserParkingDTO upDto = service.findByVehicleNo(vehicleNo);
 		model.addAttribute("upDto", upDto);
 		return "parkingupdate";
 	}
+
 
 
 
